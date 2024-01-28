@@ -1,0 +1,69 @@
+input:
+  generate:
+    mapping: |
+      root = {        
+        "id":uuid_v4(),
+        "message": fake("sentence"),
+        "created_by": fake("username"),
+        "created_at": now()
+      }
+    interval: 1s
+    count: 120
+    batch_size: 1
+
+pipeline:
+  processors:
+    - label: root_try
+      try:
+        - label: error_simulator
+          bloblang: |
+            root = if random_int(max:20) < 5 {
+              this
+            } else {
+              throw("simulated error")
+            }
+
+        - label: joke_fetcher_branch
+          branch:
+            request_map: "root = null"
+            processors:
+              - label: joke_fetcher
+                http:
+                  url: "https://api.chucknorris.io/jokes/random"
+                  verb: GET
+                  timeout: 5s
+            result_map: root.joke = this
+
+        - label: processed_state_setter
+          bloblang: |
+            root = this
+            root.processed = true
+
+output:
+  switch:
+    cases:
+      - check: errored()
+        output:
+          nats:
+            urls: ["nats://nats:4222"]
+            subject: demo.messages_dlq
+      - output:
+          nats:
+            urls: ["nats://nats:4222"]
+            subject: demo.messages
+
+logger:
+  level: INFO
+  format: logfmt
+  level_name: level
+  timestamp_name: time
+  message_name: msg
+  static_fields:
+    "service": demo
+
+http:
+  enabled: true
+  address: 0.0.0.0:8080
+  debug_endpoints: false
+
+shutdown_delay: 30s

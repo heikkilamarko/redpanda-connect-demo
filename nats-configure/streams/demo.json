@@ -1,0 +1,21 @@
+{
+  "name": "demo",
+  "subjects": ["demo.messages"],
+  "retention": "workqueue",
+  "max_consumers": -1,
+  "max_msgs_per_subject": -1,
+  "max_msgs": 100000,
+  "max_bytes": -1,
+  "max_age": 2592000000000000,
+  "max_msg_size": -1,
+  "storage": "file",
+  "discard": "new",
+  "num_replicas": 1,
+  "duplicate_window": 120000000000,
+  "sealed": false,
+  "deny_delete": false,
+  "deny_purge": false,
+  "allow_rollup_hdrs": false,
+  "allow_direct": true,
+  "mirror_direct": false
+}

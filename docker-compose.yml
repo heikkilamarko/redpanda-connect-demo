@@ -1,0 +1,103 @@
+version: "3.9"
+
+services:
+  nats:
+    build: ./nats
+    image: benthos-demo/nats
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/nats.env
+    ports:
+      - 4222:4222
+      - 8222:8222
+    volumes:
+      - nats:/nats
+    networks:
+      - benthos-demo
+
+  nats-configure:
+    build: ./nats-configure
+    image: benthos-demo/nats-configure
+    labels:
+      - "com.benthos-demo.service=nats-configure"
+      - "com.benthos-demo.monitor"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/nats-configure.env
+    networks:
+      - benthos-demo
+    depends_on:
+      - nats
+
+  postgres:
+    build: ./postgres
+    image: benthos-demo/postgres
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/postgres.env
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - benthos-demo
+
+  prometheus:
+    build: ./prometheus
+    image: benthos-demo/prometheus
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/prometheus.env
+    volumes:
+      - prometheus:/prometheus
+    networks:
+      - benthos-demo
+
+  grafana:
+    build: ./grafana
+    image: benthos-demo/grafana
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/grafana.env
+    volumes:
+      - grafana:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - benthos-demo
+    depends_on:
+      - postgres
+      - prometheus
+
+  benthos:
+    build: ./benthos
+    image: benthos-demo/benthos
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/benthos.env
+    networks:
+      - benthos-demo
+    depends_on:
+      - nats
+
+networks:
+  benthos-demo:
+    name: benthos-demo
+
+volumes:
+  nats:
+  postgres:
+  prometheus:
+  grafana:
