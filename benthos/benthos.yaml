@@ -7,37 +7,32 @@ input:
         "created_by": fake("username"),
         "created_at": now()
       }
-    interval: 1s
-    count: 120
+    count: ${B_GENERATE_COUNT}
+    interval: ${B_GENERATE_INTERVAL}
     batch_size: 1
 
 pipeline:
   processors:
     - label: root_try
       try:
-        - label: error_simulator
-          bloblang: |
-            root = if random_int(max:20) < 5 {
-              this
-            } else {
-              throw("simulated error")
-            }
+        - label: simulate_error
+          bloblang: root = if random_int() % 5 == 0 { throw("simulated error") }
 
-        - label: joke_fetcher_branch
+        - label: get_joke_branch
           branch:
-            request_map: "root = null"
+            request_map: root = null
             processors:
-              - label: joke_fetcher
+              - label: get_joke
                 http:
                   url: "https://api.chucknorris.io/jokes/random"
                   verb: GET
                   timeout: 5s
             result_map: root.joke = this
 
-        - label: processed_state_setter
+        - label: set_processed_state
           bloblang: |
             root = this
-            root.processed = true
+            root.is_processed = true
 
 output:
   switch:
@@ -45,25 +40,27 @@ output:
       - check: errored()
         output:
           nats:
-            urls: ["nats://nats:4222"]
+            urls:
+              - ${B_NATS_URL}
             subject: demo.messages_dlq
       - output:
           nats:
-            urls: ["nats://nats:4222"]
+            urls:
+              - ${B_NATS_URL}
             subject: demo.messages
 
 logger:
-  level: INFO
+  level: ${B_LOG_LEVEL:INFO}
   format: logfmt
   level_name: level
   timestamp_name: time
   message_name: msg
   static_fields:
-    "service": demo
+    service: demo
 
 http:
   enabled: true
-  address: 0.0.0.0:8080
+  address: ${B_HTTP_ADDRESS}
   debug_endpoints: false
 
 shutdown_delay: 30s
