@@ -1,2 +1,3 @@
 FROM jeffail/benthos
-ADD benthos.yaml /
+ARG benthos_config
+ADD $benthos_config /benthos.yaml

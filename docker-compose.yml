@@ -10,8 +10,8 @@ services:
     env_file:
       - ./env/nats.env
     ports:
-      - 4222:4222
-      - 8222:8222
+      - "4222:4222"
+      - "8222:8222"
     volumes:
       - nats:/nats
     networks:
@@ -42,7 +42,7 @@ services:
     env_file:
       - ./env/postgres.env
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
     networks:
@@ -79,9 +79,12 @@ services:
       - postgres
       - prometheus
 
-  benthos:
-    build: ./benthos
-    image: benthos-demo/benthos
+  benthos1:
+    build:
+      context: ./benthos
+      args:
+        benthos_config: generate2nats.yaml
+    image: benthos-demo/benthos1
     deploy:
       restart_policy:
         condition: on-failure
@@ -91,6 +94,24 @@ services:
       - benthos-demo
     depends_on:
       - nats
+
+  benthos2:
+    build:
+      context: ./benthos
+      args:
+        benthos_config: http2postgres.yaml
+    image: benthos-demo/benthos2
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/benthos.env
+    ports:
+      - "8001:8080"
+    networks:
+      - benthos-demo
+    depends_on:
+      - postgres
 
 networks:
   benthos-demo:
