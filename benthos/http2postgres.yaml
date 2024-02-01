@@ -1,8 +1,11 @@
 input:
-  label: "http_input"
+  label: http_input
   http_server:
     path: /post
     timeout: 5s
+    sync_response:
+      status: ${! json("status") }
+      headers: { "Content-Type": "application/json" }
 
 pipeline:
   processors:
@@ -12,15 +15,25 @@ pipeline:
         root.created_at = now()
 
 output:
-  sql_raw:
-    driver: postgres
-    dsn: ${B_POSTGRES_CONNECTIONSTRING}
-    query: INSERT INTO task (name, created_at) VALUES ($1, $2);
-    args_mapping: |
-      root = [
-        this.name,
-        this.created_at
-      ]
+  fallback:
+    - label: sql_output
+      sql_raw:
+        driver: postgres
+        dsn: ${B_POSTGRES_CONNECTIONSTRING}
+        query: INSERT INTO task (name, created_at) VALUES ($1, $2);
+        args_mapping: |
+          root = [
+            this.name,
+            this.created_at
+          ]
+    - label: error_response
+      sync_response: {}
+      processors:
+        - mapping: |
+            root = {
+              "status": 500,
+              "error": "processing failed"
+            }
 
 logger:
   level: ${B_LOG_LEVEL:INFO}
