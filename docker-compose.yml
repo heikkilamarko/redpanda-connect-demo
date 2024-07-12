@@ -18,9 +18,6 @@ services:
   nats-configure:
     build: ./nats-configure
     image: benthos-demo/nats-configure
-    labels:
-      - "com.benthos-demo.service=nats-configure"
-      - "com.benthos-demo.monitor"
     deploy:
       restart_policy:
         condition: on-failure
