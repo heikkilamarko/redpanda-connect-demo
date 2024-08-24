@@ -39,12 +39,12 @@ output:
     cases:
       - check: errored()
         output:
-          nats:
+          nats_jetstream:
             urls:
               - ${B_NATS_URL}
             subject: demo.messages_dlq
       - output:
-          nats:
+          nats_jetstream:
             urls:
               - ${B_NATS_URL}
             subject: demo.messages
