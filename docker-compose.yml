@@ -43,6 +43,35 @@ services:
     networks:
       - benthos-demo
 
+  minio:
+    image: minio/minio
+    deploy:
+      restart_policy:
+        condition: on-failure
+    command: server /data --console-address ":9001"
+    env_file:
+      - ./env/minio.env
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio:/data
+    networks:
+      - benthos-demo
+
+  minio-configure:
+    build: ./minio-configure
+    image: benthos-demo/minio-configure
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/minio-configure.env
+    networks:
+      - benthos-demo
+    depends_on:
+      - minio
+
   prometheus:
     build: ./prometheus
     image: benthos-demo/prometheus
@@ -108,6 +137,24 @@ services:
     depends_on:
       - postgres
 
+  benthos3:
+    build:
+      context: ./benthos
+      args:
+        benthos_config: http2minio.yaml
+    image: benthos-demo/benthos3
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/benthos.env
+    ports:
+      - "8002:8080"
+    networks:
+      - benthos-demo
+    depends_on:
+      - minio
+
 networks:
   benthos-demo:
     name: benthos-demo
@@ -115,5 +162,6 @@ networks:
 volumes:
   nats:
   postgres:
+  minio:
   prometheus:
   grafana:

@@ -8,3 +8,4 @@ scrape_configs:
       - targets:
           - benthos1:8080
           - benthos2:8080
+          - benthos3:8080
