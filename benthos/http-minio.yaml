@@ -1,5 +1,5 @@
 input:
-  label: http_input
+  label: http_server_input
   http_server:
     path: /post
     timeout: 5s
@@ -9,7 +9,7 @@ input:
 
 pipeline:
   processors:
-    - label: set_timestamp
+    - label: set_created_at_timestamp
       bloblang: |
         root = this
         root.created_at = now()

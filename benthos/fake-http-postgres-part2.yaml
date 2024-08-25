@@ -1,20 +1,21 @@
 input:
-  label: http_input
+  label: http_server_input
   http_server:
     path: /post
-    timeout: 5s
+    timeout: 30s
     sync_response:
       status: ${! json("status") }
       headers: { "Content-Type": "application/json" }
 
 pipeline:
   processors:
-    - unarchive:
+    - label: unarchive_from_json_array
+      unarchive:
         format: json_array
 
 output:
   fallback:
-    - label: sql_output
+    - label: sql_raw_output
       sql_raw:
         driver: postgres
         dsn: ${B_POSTGRES_CONNECTIONSTRING}

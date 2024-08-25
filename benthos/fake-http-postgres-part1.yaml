@@ -1,4 +1,5 @@
 input:
+  label: fake_input
   generate:
     mapping: |
       root = {
@@ -12,14 +13,16 @@ input:
 
 pipeline:
   processors:
-    - archive:
+    - label: archive_to_json_array
+      archive:
         format: json_array
 
 output:
+  label: http_client_output
   http_client:
     url: http://fake-http-postgres-part2:8080/post
     verb: POST
-    timeout: 5s
+    timeout: 30s
     retries: 3
     headers:
       Content-Type: application/json
