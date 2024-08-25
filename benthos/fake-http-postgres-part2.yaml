@@ -42,7 +42,7 @@ logger:
   timestamp_name: time
   message_name: msg
   static_fields:
-    service: demo
+    service: fake-http-postgres-part2
 
 http:
   enabled: true

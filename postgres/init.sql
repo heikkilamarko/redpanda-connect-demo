@@ -4,7 +4,9 @@ CREATE DATABASE benthos;
 \c benthos;
 
 CREATE TABLE task (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(200) NOT NULL,
+    id SERIAL NOT NULL,
+    name TEXT NOT NULL,
     created_at timestamptz NOT NULL
 );
+
+SELECT create_hypertable('task', by_range('created_at'));

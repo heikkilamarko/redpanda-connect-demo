@@ -1,0 +1,33 @@
+input:
+  generate:
+    mapping: |
+      root = {
+        "name": fake("word")
+      }
+    interval: ""
+    batch_size: 1
+
+output:
+  http_client:
+    url: http://fake-http-postgres-part2:8080/post
+    verb: POST
+    timeout: 5s
+    retries: 3
+    headers:
+      Content-Type: application/json
+
+logger:
+  level: ${B_LOG_LEVEL:INFO}
+  format: logfmt
+  level_name: level
+  timestamp_name: time
+  message_name: msg
+  static_fields:
+    service: fake-http-postgres-part1
+
+http:
+  enabled: true
+  address: ${B_HTTP_ADDRESS}
+  debug_endpoints: false
+
+shutdown_delay: 30s

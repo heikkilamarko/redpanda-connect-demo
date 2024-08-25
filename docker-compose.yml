@@ -103,12 +103,12 @@ services:
       - postgres
       - prometheus
 
-  benthos1:
+  fake-http-postgres-part1:
     build:
       context: ./benthos
       args:
-        benthos_config: generate2nats.yaml
-    image: benthos-demo/benthos1
+        benthos_config: fake-http-postgres-part1.yaml
+    image: benthos-demo/fake-http-postgres-part1
     deploy:
       restart_policy:
         condition: on-failure
@@ -117,14 +117,14 @@ services:
     networks:
       - benthos-demo
     depends_on:
-      - nats
+      - fake-http-postgres-part2
 
-  benthos2:
+  fake-http-postgres-part2:
     build:
       context: ./benthos
       args:
-        benthos_config: http2postgres.yaml
-    image: benthos-demo/benthos2
+        benthos_config: fake-http-postgres-part2.yaml
+    image: benthos-demo/fake-http-postgres-part2
     deploy:
       restart_policy:
         condition: on-failure
@@ -137,12 +137,28 @@ services:
     depends_on:
       - postgres
 
-  benthos3:
+  fake-nats:
     build:
       context: ./benthos
       args:
-        benthos_config: http2minio.yaml
-    image: benthos-demo/benthos3
+        benthos_config: fake-nats.yaml
+    image: benthos-demo/fake-nats
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/benthos.env
+    networks:
+      - benthos-demo
+    depends_on:
+      - nats
+
+  http-minio:
+    build:
+      context: ./benthos
+      args:
+        benthos_config: http-minio.yaml
+    image: benthos-demo/http-minio
     deploy:
       restart_policy:
         condition: on-failure

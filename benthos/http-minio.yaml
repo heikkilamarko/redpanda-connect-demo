@@ -22,7 +22,7 @@ output:
         region: local
         bucket: ${B_MINIO_BUCKET}
         force_path_style_urls: true
-        path: ${!timestamp_unix_nano()}-${!"%06d".format(count("files"))}.json
+        path: ${! timestamp_unix_nano() }-${! "%06d".format(count("files")) }.json
         content_type: application/json
         credentials:
           id: ${B_MINIO_CREDENTIALS_ID}
@@ -43,7 +43,7 @@ logger:
   timestamp_name: time
   message_name: msg
   static_fields:
-    service: demo
+    service: http-minio
 
 http:
   enabled: true

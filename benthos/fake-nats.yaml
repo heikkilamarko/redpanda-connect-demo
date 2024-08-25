@@ -1,7 +1,7 @@
 input:
   generate:
     mapping: |
-      root = {        
+      root = {
         "id":uuid_v4(),
         "message": fake("sentence"),
         "created_by": fake("username"),
@@ -56,7 +56,7 @@ logger:
   timestamp_name: time
   message_name: msg
   static_fields:
-    service: demo
+    service: fake-nats
 
 http:
   enabled: true
