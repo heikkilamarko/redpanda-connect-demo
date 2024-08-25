@@ -6,6 +6,7 @@ CREATE DATABASE benthos;
 CREATE TABLE task (
     id SERIAL NOT NULL,
     name TEXT NOT NULL,
+    description TEXT,
     created_at timestamptz NOT NULL
 );
 

@@ -2,10 +2,18 @@ input:
   generate:
     mapping: |
       root = {
-        "name": fake("word")
+        "name": fake("word"),
+        "description": fake("paragraph"),
+        "created_at": now()
       }
     interval: ""
-    batch_size: 1
+    batch_size: 1000
+    auto_replay_nacks: false
+
+pipeline:
+  processors:
+    - archive:
+        format: json_array
 
 output:
   http_client:

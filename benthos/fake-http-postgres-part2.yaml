@@ -9,10 +9,8 @@ input:
 
 pipeline:
   processors:
-    - label: set_timestamp
-      bloblang: |
-        root = this
-        root.created_at = now()
+    - unarchive:
+        format: json_array
 
 output:
   fallback:
@@ -20,10 +18,14 @@ output:
       sql_raw:
         driver: postgres
         dsn: ${B_POSTGRES_CONNECTIONSTRING}
-        query: INSERT INTO task (name, created_at) VALUES ($1, $2);
+        batching:
+          count: 1000
+          period: 5s
+        query: INSERT INTO task (name, description, created_at) VALUES ($1, $2, $3);
         args_mapping: |
           root = [
             this.name,
+            this.description,
             this.created_at
           ]
     - label: error_response
