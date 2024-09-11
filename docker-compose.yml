@@ -1,36 +1,34 @@
 services:
   nats:
     build: ./nats
-    image: benthos-demo/nats
+    image: redpanda-connect-demo/nats
     deploy:
       restart_policy:
         condition: on-failure
-    env_file:
-      - ./env/nats.env
     ports:
       - "4222:4222"
       - "8222:8222"
     volumes:
       - nats:/nats
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
 
   nats-configure:
     build: ./nats-configure
-    image: benthos-demo/nats-configure
+    image: redpanda-connect-demo/nats-configure
     deploy:
       restart_policy:
         condition: on-failure
     env_file:
       - ./env/nats-configure.env
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
     depends_on:
       - nats
 
   postgres:
     build: ./postgres
-    image: benthos-demo/postgres
+    image: redpanda-connect-demo/postgres
     deploy:
       restart_policy:
         condition: on-failure
@@ -41,7 +39,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
 
   minio:
     image: minio/minio
@@ -57,37 +55,35 @@ services:
     volumes:
       - minio:/data
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
 
   minio-configure:
     build: ./minio-configure
-    image: benthos-demo/minio-configure
+    image: redpanda-connect-demo/minio-configure
     deploy:
       restart_policy:
         condition: on-failure
     env_file:
       - ./env/minio-configure.env
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
     depends_on:
       - minio
 
   prometheus:
     build: ./prometheus
-    image: benthos-demo/prometheus
+    image: redpanda-connect-demo/prometheus
     deploy:
       restart_policy:
         condition: on-failure
-    env_file:
-      - ./env/prometheus.env
     volumes:
       - prometheus:/prometheus
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
 
   grafana:
     build: ./grafana
-    image: benthos-demo/grafana
+    image: redpanda-connect-demo/grafana
     deploy:
       restart_policy:
         condition: on-failure
@@ -98,82 +94,82 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
     depends_on:
       - postgres
       - prometheus
 
   fake-http-postgres-part1:
     build:
-      context: ./benthos
+      context: ./redpanda-connect
       args:
-        benthos_config: fake-http-postgres-part1.yaml
-    image: benthos-demo/fake-http-postgres-part1
+        connect_yaml: fake-http-postgres-part1.yaml
+    image: redpanda-connect-demo/fake-http-postgres-part1
     deploy:
       restart_policy:
         condition: on-failure
     env_file:
-      - ./env/benthos.env
+      - ./env/redpanda-connect.env
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
     depends_on:
       - fake-http-postgres-part2
 
   fake-http-postgres-part2:
     build:
-      context: ./benthos
+      context: ./redpanda-connect
       args:
-        benthos_config: fake-http-postgres-part2.yaml
-    image: benthos-demo/fake-http-postgres-part2
+        connect_yaml: fake-http-postgres-part2.yaml
+    image: redpanda-connect-demo/fake-http-postgres-part2
     deploy:
       restart_policy:
         condition: on-failure
     env_file:
-      - ./env/benthos.env
+      - ./env/redpanda-connect.env
     ports:
       - "8001:8080"
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
     depends_on:
       - postgres
 
   fake-nats:
     build:
-      context: ./benthos
+      context: ./redpanda-connect
       args:
-        benthos_config: fake-nats.yaml
-    image: benthos-demo/fake-nats
+        connect_yaml: fake-nats.yaml
+    image: redpanda-connect-demo/fake-nats
     deploy:
       restart_policy:
         condition: on-failure
     env_file:
-      - ./env/benthos.env
+      - ./env/redpanda-connect.env
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
     depends_on:
       - nats
 
   http-minio:
     build:
-      context: ./benthos
+      context: ./redpanda-connect
       args:
-        benthos_config: http-minio.yaml
-    image: benthos-demo/http-minio
+        connect_yaml: http-minio.yaml
+    image: redpanda-connect-demo/http-minio
     deploy:
       restart_policy:
         condition: on-failure
     env_file:
-      - ./env/benthos.env
+      - ./env/redpanda-connect.env
     ports:
       - "8002:8080"
     networks:
-      - benthos-demo
+      - redpanda-connect-demo
     depends_on:
       - minio
 
 networks:
-  benthos-demo:
-    name: benthos-demo
+  redpanda-connect-demo:
+    name: redpanda-connect-demo
 
 volumes:
   nats:

@@ -1,2 +1,2 @@
 FROM grafana/grafana-oss
-COPY ./provisioning /etc/benthos-demo/provisioning
+COPY ./provisioning /etc/redpanda-connect-demo/provisioning

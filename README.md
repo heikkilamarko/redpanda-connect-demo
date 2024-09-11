@@ -1,4 +1,4 @@
-# Benthos Demo
+# Redpanda Connect Demo
 
 ## Start
 

@@ -1,7 +1,7 @@
 CREATE DATABASE grafana;
-CREATE DATABASE benthos;
+CREATE DATABASE redpanda_connect;
 
-\c benthos;
+\c redpanda_connect;
 
 CREATE TABLE task (
     id SERIAL NOT NULL,

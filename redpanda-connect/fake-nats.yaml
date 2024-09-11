@@ -16,7 +16,7 @@ pipeline:
   processors:
     - try:
         - label: simulate_error
-          bloblang: root = if random_int() % 5 == 0 { throw("simulated error") }
+          mapping: root = if random_int() % 5 == 0 { throw("simulated error") }
 
         - branch:
             request_map: root = null
@@ -29,7 +29,7 @@ pipeline:
             result_map: root.joke = this
 
         - label: set_processed_state
-          bloblang: |
+          mapping: |
             root = this
             root.is_processed = true
 
@@ -53,15 +53,10 @@ output:
 logger:
   level: ${B_LOG_LEVEL:INFO}
   format: logfmt
-  level_name: level
-  timestamp_name: time
-  message_name: msg
   static_fields:
     service: fake-nats
 
 http:
-  enabled: true
   address: ${B_HTTP_ADDRESS}
-  debug_endpoints: false
 
 shutdown_delay: 30s
