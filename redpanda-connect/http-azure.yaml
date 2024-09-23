@@ -10,7 +10,7 @@ input:
 pipeline:
   processors:
     - try:
-        - mapping: "meta error_status = 400"
+        - mapping: meta error_status = 400
 
         - label: json_schema_validation
           json_schema:
@@ -26,7 +26,7 @@ pipeline:
                 "required": ["id"]
               }
 
-        - mapping: "meta error_status = 500"
+        - mapping: meta error_status = 500
 
         - label: enrich_with_factory_model
           branch:
