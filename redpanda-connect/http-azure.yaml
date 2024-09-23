@@ -1,0 +1,55 @@
+input:
+  label: http_input
+  http_server:
+    path: /post
+    timeout: 5s
+    sync_response:
+      status: ${!json("status")}
+      headers: { "Content-Type": "application/json" }
+
+pipeline:
+  processors:
+    - try:
+        - label: json_schema_validation
+          json_schema:
+            schema: |
+              {
+                "type": "object"
+              }
+
+        - label: enrich_with_factory_model
+          branch:
+            processors:
+              - sql_raw:
+                  driver: postgres
+                  dsn: ${B_POSTGRES_CONNECTIONSTRING}
+                  query: "SELECT get_factory_model()"
+            request_map: root = null
+            result_map: |
+              root.factory_model = this.0.get_factory_model.parse_json()
+
+output:
+  switch:
+    cases:
+      - check: errored()
+        output:
+          label: http_error_response
+          sync_response: {}
+          processors:
+            - mapping: |
+                root = {
+                  "status": 500,
+                  "error": "processing failed"
+                }
+
+      - output:
+          label: azure_blob_storage
+          azure_blob_storage:
+            storage_connection_string: ${B_AZURE_STORAGE_CONNECTION_STRING}
+            container: ${B_AZURE_STORAGE_CONTAINER_NAME}
+            path: messages/${!now().ts_format("2006/01/02","UTC")}/${!timestamp_unix_nano()}-${!"%06d".format(count("files"))}.json
+
+http:
+  address: 0.0.0.0:8080
+
+shutdown_delay: 10s

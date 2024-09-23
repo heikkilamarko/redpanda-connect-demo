@@ -167,6 +167,22 @@ services:
     depends_on:
       - minio
 
+  http-azure:
+    build:
+      context: ./redpanda-connect
+      args:
+        connect_yaml: http-azure.yaml
+    image: redpanda-connect-demo/http-azure
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/redpanda-connect.env
+    ports:
+      - "8003:8080"
+    networks:
+      - redpanda-connect-demo
+
 networks:
   redpanda-connect-demo:
     name: redpanda-connect-demo
