@@ -10,12 +10,23 @@ input:
 pipeline:
   processors:
     - try:
+        - mapping: "meta error_status = 400"
+
         - label: json_schema_validation
           json_schema:
             schema: |
               {
-                "type": "object"
+                "type": "object",
+                "properties": {
+                  "id": { 
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": ["id"]
               }
+
+        - mapping: "meta error_status = 500"
 
         - label: enrich_with_factory_model
           branch:
@@ -37,10 +48,8 @@ output:
           sync_response: {}
           processors:
             - mapping: |
-                root = {
-                  "status": 500,
-                  "error": "processing failed"
-                }
+                root.status = @error_status | 500
+                root.error = if @error_status == 400 { error() } else { "internal error" }
 
       - output:
           label: azure_blob_storage
