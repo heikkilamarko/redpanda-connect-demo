@@ -18,12 +18,21 @@ pipeline:
               {
                 "type": "object",
                 "properties": {
-                  "id": { 
+                  "id": {
                     "type": "string",
                     "format": "uuid"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 10
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 1000
                   }
                 },
-                "required": ["id"]
+                "required": ["id", "name"]
               }
 
         - mapping: meta error_status = 500
