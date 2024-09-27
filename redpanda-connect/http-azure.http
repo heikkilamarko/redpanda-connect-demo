@@ -1,0 +1,48 @@
+@base_url = http://localhost:8003
+
+### valid message
+
+POST {{base_url}}/post
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": "d1c89917-bd24-4223-9e29-5951ab52a235",
+    "name": "example name",
+    "description": "example description"
+}
+
+### invalid message: id missing
+
+POST {{base_url}}/post
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "example name",
+    "description": "example description"
+}
+
+### invalid message: too short name
+
+POST {{base_url}}/post
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": "d1c89917-bd24-4223-9e29-5951ab52a235",
+    "name": "fo",
+    "description": "example description"
+}
+
+### invalid message: too long name
+
+POST {{base_url}}/post
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": "d1c89917-bd24-4223-9e29-5951ab52a235",
+    "name": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+    "description": "example description"
+}

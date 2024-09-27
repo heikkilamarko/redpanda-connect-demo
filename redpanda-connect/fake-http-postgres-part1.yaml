@@ -28,12 +28,12 @@ output:
       Content-Type: application/json
 
 logger:
-  level: ${B_LOG_LEVEL:INFO}
+  level: ${LOG_LEVEL:INFO}
   format: logfmt
   static_fields:
     service: fake-http-postgres-part1
 
 http:
-  address: ${B_HTTP_ADDRESS}
+  address: ${HTTP_ADDRESS}
 
 shutdown_delay: 30s

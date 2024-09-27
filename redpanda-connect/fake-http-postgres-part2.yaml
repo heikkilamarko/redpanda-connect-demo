@@ -18,7 +18,7 @@ output:
     - label: sql_raw_output
       sql_raw:
         driver: postgres
-        dsn: ${B_POSTGRES_CONNECTIONSTRING}
+        dsn: ${POSTGRES_CONNECTIONSTRING}
         batching:
           count: 1000
           period: 5s
@@ -39,12 +39,12 @@ output:
             }
 
 logger:
-  level: ${B_LOG_LEVEL:INFO}
+  level: ${LOG_LEVEL:INFO}
   format: logfmt
   static_fields:
     service: fake-http-postgres-part2
 
 http:
-  address: ${B_HTTP_ADDRESS}
+  address: ${HTTP_ADDRESS}
 
 shutdown_delay: 30s

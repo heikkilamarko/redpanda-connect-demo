@@ -8,8 +8,8 @@ input:
         "created_by": fake("username"),
         "created_at": now()
       }
-    count: ${B_GENERATE_COUNT}
-    interval: ${B_GENERATE_INTERVAL}
+    count: ${GENERATE_COUNT}
+    interval: ${GENERATE_INTERVAL}
     batch_size: 1
 
 pipeline:
@@ -41,22 +41,22 @@ output:
           label: nats_jetstream_dead_letter_output
           nats_jetstream:
             urls:
-              - ${B_NATS_URL}
+              - ${NATS_URL}
             subject: demo.messages_dlq
       - output:
           label: nats_jetstream_output
           nats_jetstream:
             urls:
-              - ${B_NATS_URL}
+              - ${NATS_URL}
             subject: demo.messages
 
 logger:
-  level: ${B_LOG_LEVEL:INFO}
+  level: ${LOG_LEVEL:INFO}
   format: logfmt
   static_fields:
     service: fake-nats
 
 http:
-  address: ${B_HTTP_ADDRESS}
+  address: ${HTTP_ADDRESS}
 
 shutdown_delay: 30s

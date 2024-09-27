@@ -18,15 +18,15 @@ output:
   fallback:
     - label: minio_output
       aws_s3:
-        endpoint: ${B_MINIO_ENDPOINT}
+        endpoint: ${MINIO_ENDPOINT}
         region: local
-        bucket: ${B_MINIO_BUCKET}
+        bucket: ${MINIO_BUCKET}
         force_path_style_urls: true
         path: ${! timestamp_unix_nano() }-${! "%06d".format(count("files")) }.json
         content_type: application/json
         credentials:
-          id: ${B_MINIO_CREDENTIALS_ID}
-          secret: ${B_MINIO_CREDENTIALS_SECRET}
+          id: ${MINIO_CREDENTIALS_ID}
+          secret: ${MINIO_CREDENTIALS_SECRET}
     - label: error_response
       sync_response: {}
       processors:
@@ -37,12 +37,12 @@ output:
             }
 
 logger:
-  level: ${B_LOG_LEVEL:INFO}
+  level: ${LOG_LEVEL:INFO}
   format: logfmt
   static_fields:
     service: http-minio
 
 http:
-  address: ${B_HTTP_ADDRESS}
+  address: ${HTTP_ADDRESS}
 
 shutdown_delay: 30s
