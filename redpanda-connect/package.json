@@ -1,0 +1,8 @@
+{
+  "name": "redpanda-connect",
+  "dependencies": {
+    "dayjs": "1.11.13",
+    "fraction.js": "4.3.7",
+    "mathjs": "13.1.1"
+  }
+}

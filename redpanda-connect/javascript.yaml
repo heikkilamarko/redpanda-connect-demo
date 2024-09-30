@@ -1,0 +1,18 @@
+input:
+  generate:
+    mapping: |
+      root.a = [[1, 2], [3, 4]] 
+      root.b = [[5, 6], [1, 1]]
+    count: 10
+    interval: ""
+
+pipeline:
+  processors:
+    - javascript:
+        file: javascript_processor.js
+output:
+  file:
+    path: javascript.output.json
+
+logger:
+  level: DEBUG
