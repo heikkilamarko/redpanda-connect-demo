@@ -43,10 +43,10 @@ pipeline:
               - sql_raw:
                   driver: postgres
                   dsn: ${POSTGRES_CONNECTIONSTRING}
-                  query: "SELECT get_factory_model()"
+                  query: "SELECT demo.get_factory_model() as factory_model"
             request_map: root = null
             result_map: |
-              root.factory_model = this.0.get_factory_model.parse_json()
+              root.factory_model = this.0.factory_model.parse_json()
 
 output:
   switch:

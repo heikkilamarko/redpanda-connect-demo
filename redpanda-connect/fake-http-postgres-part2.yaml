@@ -22,7 +22,7 @@ output:
         batching:
           count: 1000
           period: 5s
-        query: INSERT INTO task (name, description, created_at) VALUES ($1, $2, $3);
+        query: INSERT INTO demo.task (name, description, created_at) VALUES ($1, $2, $3);
         args_mapping: |
           root = [
             this.name,
