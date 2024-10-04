@@ -45,4 +45,4 @@ logger:
 http:
   address: ${HTTP_ADDRESS}
 
-shutdown_delay: 30s
+shutdown_delay: 10s

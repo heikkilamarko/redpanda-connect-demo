@@ -67,7 +67,13 @@ output:
             container: ${AZURE_STORAGE_CONTAINER_NAME}
             path: messages/${!now().ts_format("2006/01/02","UTC")}/${!timestamp_unix_nano()}-${!"%06d".format(count("files"))}.json
 
+logger:
+  level: ${LOG_LEVEL:INFO}
+  format: logfmt
+  static_fields:
+    service: http-azure-blob
+
 http:
-  address: 0.0.0.0:8080
+  address: ${HTTP_ADDRESS}
 
 shutdown_delay: 10s

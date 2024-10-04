@@ -8,8 +8,8 @@ input:
         "created_by": fake("username"),
         "created_at": now()
       }
-    count: ${GENERATE_COUNT}
-    interval: ${GENERATE_INTERVAL}
+    count: 1000
+    interval: 1s
     batch_size: 1
 
 pipeline:
@@ -59,4 +59,4 @@ logger:
 http:
   address: ${HTTP_ADDRESS}
 
-shutdown_delay: 30s
+shutdown_delay: 10s

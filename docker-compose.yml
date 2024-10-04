@@ -100,10 +100,7 @@ services:
       - prometheus
 
   fake-http-postgres-part1:
-    build:
-      context: ./redpanda-connect
-      args:
-        connect_yaml: fake-http-postgres-part1.yaml
+    build: ./redpanda-connect/fake-http-postgres/part1
     image: redpanda-connect-demo/fake-http-postgres-part1
     deploy:
       restart_policy:
@@ -116,10 +113,7 @@ services:
       - fake-http-postgres-part2
 
   fake-http-postgres-part2:
-    build:
-      context: ./redpanda-connect
-      args:
-        connect_yaml: fake-http-postgres-part2.yaml
+    build: ./redpanda-connect/fake-http-postgres/part2
     image: redpanda-connect-demo/fake-http-postgres-part2
     deploy:
       restart_policy:
@@ -134,10 +128,7 @@ services:
       - postgres
 
   fake-nats:
-    build:
-      context: ./redpanda-connect
-      args:
-        connect_yaml: fake-nats.yaml
+    build: ./redpanda-connect/fake-nats
     image: redpanda-connect-demo/fake-nats
     deploy:
       restart_policy:
@@ -150,10 +141,7 @@ services:
       - nats
 
   http-minio:
-    build:
-      context: ./redpanda-connect
-      args:
-        connect_yaml: http-minio.yaml
+    build: ./redpanda-connect/http-minio
     image: redpanda-connect-demo/http-minio
     deploy:
       restart_policy:
@@ -167,12 +155,9 @@ services:
     depends_on:
       - minio
 
-  http-azure:
-    build:
-      context: ./redpanda-connect
-      args:
-        connect_yaml: http-azure.yaml
-    image: redpanda-connect-demo/http-azure
+  http-azure-blob:
+    build: ./redpanda-connect/http-azure-blob
+    image: redpanda-connect-demo/http-azure-blob
     deploy:
       restart_policy:
         condition: on-failure
