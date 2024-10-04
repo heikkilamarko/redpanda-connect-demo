@@ -1,0 +1,19 @@
+input:
+  file:
+    paths:
+      - ./message.json
+    scanner:
+      json_documents: {}
+
+pipeline:
+  processors:
+    - mapping: |
+        root = this
+
+    - mapping: |
+        root = this.format_json()
+
+output:
+  file:
+    path: ./message.processed.json
+    codec: all-bytes

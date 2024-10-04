@@ -31,3 +31,5 @@ node_modules
 *.tfstate*
 
 *.drawio.bkp
+
+*.processed.json

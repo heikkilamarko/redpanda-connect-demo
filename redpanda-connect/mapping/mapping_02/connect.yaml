@@ -1,0 +1,36 @@
+input:
+  file:
+    paths:
+      - ./message.json
+    scanner:
+      json_documents: {}
+
+pipeline:
+  processors:
+    - mapping: |
+        root.id = this.id
+        root.processed_at = now()
+        root.item_count = this.items.length()
+
+        map item_map {
+          let key = this.name.
+            trim().
+            lowercase().
+            re_replace_all("[\\s]+", "_")
+
+          root = {
+            $key: this.description
+          }
+        }
+
+        root.items = this.items.
+          map_each(i -> i.apply("item_map")).
+          squash()
+
+    - mapping: |
+        root = this.format_json()
+
+output:
+  file:
+    path: ./message.processed.json
+    codec: all-bytes
