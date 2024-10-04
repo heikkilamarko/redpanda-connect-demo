@@ -1,0 +1,56 @@
+input:
+  file:
+    paths:
+      - ./messages/*.json
+    scanner:
+      json_documents: {}
+
+pipeline:
+  processors:
+    - log:
+        message: "Processing message: ${!content()}"
+        level: DEBUG
+
+    - switch:
+        - check: this.cache_operation == "set"
+          processors:
+            - cache:
+                resource: memory_cache
+                operator: set
+                key: this.key
+                value: ${!this.value}
+
+        - check: this.cache_operation == "delete"
+          processors:
+            - cache:
+                resource: memory_cache
+                operator: delete
+                key: this.key
+
+        - processors: # default to get
+            - branch:
+                request_map: root.key = this.key
+
+                processors:
+                  - cache:
+                      resource: memory_cache
+                      operator: get
+                      key: this.key
+
+                  - catch:
+                      - mapping: root.__error__ = if error().contains("not exist") { "cache miss" } else { error() }
+
+                result_map: root.cached_value = this
+
+output:
+  file:
+    path: ./message.processed.json
+
+cache_resources:
+  - label: memory_cache
+    memory:
+      default_ttl: 60s
+
+logger:
+  level: INFO
+  format: logfmt

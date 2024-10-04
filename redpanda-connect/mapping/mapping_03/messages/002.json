@@ -1,0 +1,8 @@
+{
+  "cache_operation": "set",
+  "key": "key1",
+  "value": {
+    "message": "cache me",
+    "description": "lorem ipsum dolor sit amet"
+  }
+}
