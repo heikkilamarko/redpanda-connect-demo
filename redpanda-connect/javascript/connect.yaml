@@ -9,10 +9,10 @@ input:
 pipeline:
   processors:
     - javascript:
-        file: javascript_processor.js
+        file: processor.js
 output:
   file:
-    path: javascript.output.json
+    path: javascript.processed.json
 
 logger:
-  level: DEBUG
+  level: INFO
