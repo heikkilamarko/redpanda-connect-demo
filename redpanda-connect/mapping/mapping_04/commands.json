@@ -1,0 +1,30 @@
+[
+  {
+    "command": "echo",
+    "args": ["Hello 🦊"]
+  },
+  {
+    "command": "ls",
+    "args": ["-l", "-a"]
+  },
+  {
+    "command": "pwd",
+    "args": []
+  },
+  {
+    "command": "python3",
+    "args": ["-V"]
+  },
+  {
+    "command": "node",
+    "args": ["--version"]
+  },
+  {
+    "command": "go",
+    "args": ["version"]
+  },
+  {
+    "command": "python3",
+    "args": ["tell_joke.py"]
+  }
+]

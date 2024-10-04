@@ -1,0 +1,18 @@
+input:
+  file:
+    paths:
+      - ./commands.json
+    scanner:
+      json_documents: {}
+
+pipeline:
+  processors:
+    - unarchive:
+        format: json_array
+
+    - command:
+        name: ${! this.command }
+        args_mapping: this.args
+
+output:
+  stdout: {}
