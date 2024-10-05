@@ -45,7 +45,7 @@ output:
           azure_blob_storage:
             storage_connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
             container: ${AZURE_STORAGE_CONTAINER_NAME}
-            path: messages/${!now().ts_format("2006/01/02","UTC")}/${!timestamp_unix_nano()}-${!"%06d".format(count("files"))}.json
+            path: messages/${!now().ts_format("2006/01/02","UTC")}/message-${!timestamp_unix_nano()}.json
 
 logger:
   level: ${LOG_LEVEL:INFO}

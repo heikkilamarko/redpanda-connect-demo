@@ -153,7 +153,7 @@ services:
     networks:
       - redpanda-connect-demo
     depends_on:
-      - minio
+      - minio-configure
 
   http-azure-blob:
     build: ./redpanda-connect/http-azure-blob
