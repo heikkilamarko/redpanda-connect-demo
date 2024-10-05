@@ -4,7 +4,7 @@ input:
     path: /post
     timeout: 5s
     sync_response:
-      status: ${! json("status") }
+      status: ${!json("status")}
       headers: { "Content-Type": "application/json" }
 
 pipeline:
@@ -22,7 +22,7 @@ output:
         region: local
         bucket: ${MINIO_BUCKET}
         force_path_style_urls: true
-        path: ${! timestamp_unix_nano() }-${! "%06d".format(count("files")) }.json
+        path: ${!timestamp_unix_nano()}-${!"%06d".format(count("files"))}.json
         content_type: application/json
         credentials:
           id: ${MINIO_CREDENTIALS_ID}

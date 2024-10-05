@@ -33,3 +33,4 @@ node_modules
 *.drawio.bkp
 
 *.processed.json
+processed

@@ -1,0 +1,21 @@
+input:
+  generate:
+    mapping: |
+      root = {
+        "id": uuid_v4(),
+        "name": fake("word"),
+        "description": fake("paragraph"),
+        "created_at": now()
+      }
+    batch_size: 100
+    interval: 10s
+
+pipeline:
+  processors:
+    - archive:
+        format: zip
+        path: message-${!json("id")}.json
+
+output:
+  file:
+    path: ./processed/batch-${!timestamp_unix_milli()}.zip

@@ -11,7 +11,7 @@ pipeline:
         format: json_array
 
     - command:
-        name: ${! this.command }
+        name: ${!this.command}
         args_mapping: this.args
 
 output:
