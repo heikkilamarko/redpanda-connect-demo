@@ -5,7 +5,7 @@ CREATE DATABASE redpanda_connect;
 
 CREATE SCHEMA demo;
 
-CREATE TABLE demo.task (
+CREATE TABLE demo.processed_messages (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     description TEXT NOT NULL,

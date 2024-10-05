@@ -20,15 +20,16 @@ output:
         driver: postgres
         dsn: ${POSTGRES_CONNECTIONSTRING}
         batching:
-          count: 1000
+          count: 10
           period: 5s
-        query: INSERT INTO demo.task (name, description, created_at) VALUES ($1, $2, $3);
+        query: INSERT INTO demo.processed_messages (name, description, created_at) VALUES ($1, $2, $3);
         args_mapping: |
           root = [
             this.name,
             this.description,
             this.created_at
           ]
+
     - label: error_response
       sync_response: {}
       processors:

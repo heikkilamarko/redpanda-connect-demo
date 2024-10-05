@@ -43,6 +43,7 @@ output:
             urls:
               - ${NATS_URL}
             subject: demo.messages_dlq
+
       - output:
           label: nats_jetstream_output
           nats_jetstream:

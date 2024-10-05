@@ -14,26 +14,7 @@ pipeline:
 
         - label: json_schema_validation
           json_schema:
-            schema: |
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "format": "uuid"
-                  },
-                  "name": {
-                    "type": "string",
-                    "minLength": 3,
-                    "maxLength": 20
-                  },
-                  "description": {
-                    "type": "string",
-                    "maxLength": 1000
-                  }
-                },
-                "required": ["id", "name"]
-              }
+            schema_path: file:///json_schema.json
 
         - mapping: meta error_status = 500
 
@@ -44,7 +25,6 @@ pipeline:
                   driver: postgres
                   dsn: ${POSTGRES_CONNECTIONSTRING}
                   query: "SELECT demo.get_factory_model() as factory_model"
-            request_map: root = null
             result_map: |
               root.factory_model = this.0.factory_model.parse_json()
 
