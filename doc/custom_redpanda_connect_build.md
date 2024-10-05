@@ -2,7 +2,7 @@
 
 To optimize the image size, you can create a custom Redpanda Connect image that includes only the essential components for your data pipelines.
 
-If you've developed custom Redpanda Connect components, such as inputs, outputs, or processors, a custom build is required to integrate them into your pipelines.
+If you've developed custom Redpanda Connect components, such as inputs, outputs, or processors, you will need a custom build to integrate them into your pipelines.
 
 ## 1. Clone the GitHub Repository
 
