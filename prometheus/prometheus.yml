@@ -10,4 +10,5 @@ scrape_configs:
           - fake-http-postgres-part2:8080
           - fake-nats:8080
           - http-minio:8080
-          - http-azure:8080
+          - http-azure-blob:8080
+          - fake-azure-eventhub:8080
