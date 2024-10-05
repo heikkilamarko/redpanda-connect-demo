@@ -9,6 +9,10 @@ pipeline:
   processors:
     - mapping: |
         root = this
+        root.comment = deleted()
+        root.summary = "%s %s (%v)".format(this.first_name, this.last_name, this.age)
+        root.is_old = this.age > 70
+        root.processed_at = now()
 
     - mapping: |
         root = this.format_json()

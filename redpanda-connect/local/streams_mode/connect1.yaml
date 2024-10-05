@@ -12,4 +12,4 @@ pipeline:
 
 output:
   file:
-    path: pipeline1.processed.json
+    path: connect1.processed.json

@@ -1,6 +1,6 @@
 services:
   nats:
-    build: ./nats
+    build: ./infra/nats
     image: redpanda-connect-demo/nats
     deploy:
       restart_policy:
@@ -14,7 +14,7 @@ services:
       - redpanda-connect-demo
 
   nats-configure:
-    build: ./nats-configure
+    build: ./infra/nats-configure
     image: redpanda-connect-demo/nats-configure
     deploy:
       restart_policy:
@@ -27,7 +27,7 @@ services:
       - nats
 
   postgres:
-    build: ./postgres
+    build: ./infra/postgres
     image: redpanda-connect-demo/postgres
     deploy:
       restart_policy:
@@ -58,7 +58,7 @@ services:
       - redpanda-connect-demo
 
   minio-configure:
-    build: ./minio-configure
+    build: ./infra/minio-configure
     image: redpanda-connect-demo/minio-configure
     deploy:
       restart_policy:
@@ -71,7 +71,7 @@ services:
       - minio
 
   prometheus:
-    build: ./prometheus
+    build: ./infra/prometheus
     image: redpanda-connect-demo/prometheus
     deploy:
       restart_policy:
@@ -82,7 +82,7 @@ services:
       - redpanda-connect-demo
 
   grafana:
-    build: ./grafana
+    build: ./infra/grafana
     image: redpanda-connect-demo/grafana
     deploy:
       restart_policy:

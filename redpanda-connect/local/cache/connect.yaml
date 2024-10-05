@@ -17,25 +17,23 @@ pipeline:
             - cache:
                 resource: memory_cache
                 operator: set
-                key: this.key
-                value: ${!this.value}
+                key: ${!json("key")}
+                value: ${!json("value")}
 
         - check: this.cache_operation == "delete"
           processors:
             - cache:
                 resource: memory_cache
                 operator: delete
-                key: this.key
+                key: ${!json("key")}
 
         - processors: # default to get
             - branch:
-                request_map: root.key = this.key
-
                 processors:
                   - cache:
                       resource: memory_cache
                       operator: get
-                      key: this.key
+                      key: ${!json("key")}
 
                   - catch:
                       - mapping: root.__error__ = if error().contains("not exist") { "cache miss" } else { error() }
