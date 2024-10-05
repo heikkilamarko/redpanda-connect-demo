@@ -168,6 +168,17 @@ services:
     networks:
       - redpanda-connect-demo
 
+  fake-azure-eventhub:
+    build: ./redpanda-connect/fake-azure-eventhub
+    image: redpanda-connect-demo/fake-azure-eventhub
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/redpanda-connect.env
+    networks:
+      - redpanda-connect-demo
+
 networks:
   redpanda-connect-demo:
     name: redpanda-connect-demo

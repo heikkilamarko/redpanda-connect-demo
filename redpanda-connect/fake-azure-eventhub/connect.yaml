@@ -1,0 +1,36 @@
+input:
+  label: fake_input
+  generate:
+    mapping: |
+      root = {
+        "id":uuid_v4(),
+        "message": fake("sentence"),
+        "created_by": fake("username"),
+        "created_at": now()
+      }
+    interval: 10s
+
+output:
+  label: azure_eventhub_output
+  kafka_franz:
+    seed_brokers:
+      - ${AZURE_KAFKA_ADDRESS}
+    tls:
+      enabled: true
+    topic: ${AZURE_KAFKA_TOPIC}
+    compression: none
+    sasl:
+      - mechanism: PLAIN
+        username: "$ConnectionString"
+        password: ${AZURE_KAFKA_SASL_PASSWORD}
+
+logger:
+  level: ${LOG_LEVEL:INFO}
+  format: logfmt
+  static_fields:
+    service: fake-azure-eventhub
+
+http:
+  address: ${HTTP_ADDRESS}
+
+shutdown_delay: 10s
