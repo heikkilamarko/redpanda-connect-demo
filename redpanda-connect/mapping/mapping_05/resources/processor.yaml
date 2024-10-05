@@ -1,0 +1,6 @@
+processor_resources:
+  - label: demo_processor1
+    mapping: root = content().uppercase()
+
+  - label: demo_processor2
+    mapping: root = this.format_json()

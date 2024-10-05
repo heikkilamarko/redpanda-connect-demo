@@ -1,0 +1,15 @@
+input:
+  generate:
+    mapping: |
+      root = {
+        "name": "pipeline 1"
+      }
+    interval: "0/5 * * * * *"
+
+pipeline:
+  processors:
+    - resource: shared_processor
+
+output:
+  file:
+    path: pipeline1.processed.json

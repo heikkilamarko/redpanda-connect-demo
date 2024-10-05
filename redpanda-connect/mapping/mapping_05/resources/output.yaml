@@ -1,0 +1,5 @@
+output_resources:
+  - label: demo_output
+    file:
+      path: ./message.processed.json
+      codec: all-bytes

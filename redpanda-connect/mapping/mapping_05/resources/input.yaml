@@ -1,0 +1,7 @@
+input_resources:
+  - label: demo_input
+    file:
+      paths:
+        - ./message.json
+      scanner:
+        json_documents: {}

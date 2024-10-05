@@ -1,0 +1,5 @@
+processor_resources:
+  - label: shared_processor
+    mapping: |
+      root = this
+      root.created_at = now()

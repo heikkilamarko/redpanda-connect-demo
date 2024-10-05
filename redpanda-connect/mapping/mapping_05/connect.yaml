@@ -1,0 +1,10 @@
+input:
+  resource: demo_input
+
+pipeline:
+  processors:
+    - resource: demo_processor1
+    - resource: demo_processor2
+
+output:
+  resource: demo_output
