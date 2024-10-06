@@ -140,7 +140,7 @@ services:
     networks:
       - redpanda-connect-demo
     depends_on:
-      - nats
+      - nats-configure
 
   http-minio:
     build: ./redpanda-connect/http-minio

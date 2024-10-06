@@ -8,9 +8,8 @@ input:
         "created_by": fake("username"),
         "created_at": now()
       }
-    count: 1000
-    interval: 1s
-    batch_size: 1
+    count: 100
+    interval: 2s
 
 pipeline:
   processors:
