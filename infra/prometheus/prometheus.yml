@@ -12,3 +12,4 @@ scrape_configs:
           - http-minio:8080
           - http-azure-blob:8080
           - fake-azure-eventhub:8080
+          - azure-eventhub-mqtt:8080

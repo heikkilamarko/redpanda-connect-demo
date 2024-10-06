@@ -3,7 +3,7 @@
 ## Select context
 
 ```bash
-nats context select local
+nats context select
 ```
 
 ## List streams

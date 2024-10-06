@@ -5,6 +5,8 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
+    env_file:
+      - ./env/nats.env
     ports:
       - "4222:4222"
       - "8222:8222"
@@ -167,6 +169,8 @@ services:
       - "8003:8080"
     networks:
       - redpanda-connect-demo
+    depends_on:
+      - postgres
 
   fake-azure-eventhub:
     build: ./redpanda-connect/fake-azure-eventhub
@@ -178,6 +182,19 @@ services:
       - ./env/redpanda-connect.env
     networks:
       - redpanda-connect-demo
+
+  azure-eventhub-mqtt:
+    build: ./redpanda-connect/azure-eventhub-mqtt
+    image: redpanda-connect-demo/azure-eventhub-mqtt
+    deploy:
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./env/redpanda-connect.env
+    networks:
+      - redpanda-connect-demo
+    depends_on:
+      - nats
 
 networks:
   redpanda-connect-demo:
