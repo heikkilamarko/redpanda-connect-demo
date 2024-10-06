@@ -1,0 +1,20 @@
+{
+	"name": "ui",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"format": "prettier --write ."
+	},
+	"devDependencies": {
+		"prettier": "3.3.3",
+		"vite": "5.4.8"
+	},
+	"dependencies": {
+		"@nats-io/nats-core": "3.0.0-27",
+		"bootstrap": "5.3.3"
+	}
+}
