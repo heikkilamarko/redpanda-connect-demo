@@ -3,8 +3,12 @@
 ## Connect to the demo database
 
 ```bash
-psql -h localhost -U postgres -d redpanda_connect
+psql -h localhost -U admin -d redpanda_connect
 ```
+
+| Username | Password   |
+| -------- | ---------- |
+| `admin`  | `S3c_r3t!` |
 
 ## Run SQL commands
 

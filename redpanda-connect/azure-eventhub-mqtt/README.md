@@ -1,4 +1,4 @@
-# NATS Commands
+# NATS
 
 ## Select context
 

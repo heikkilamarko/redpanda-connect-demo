@@ -1,4 +1,4 @@
-# NATS Commands
+# NATS
 
 ## Select context
 
@@ -18,7 +18,7 @@ nats stream ls
 nats con next demo demo --raw | jq
 ```
 
-## Get dead-lettered messages
+## View dead-lettered messages
 
 ```bash
 nats stream view demo_dlq --translate 'jq'
