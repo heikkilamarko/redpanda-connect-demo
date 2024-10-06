@@ -9,6 +9,24 @@
 - [Introducing Redpanda Connect](https://www.redpanda.com/blog/redpanda-connect)
 - [Official Documentation](https://docs.redpanda.com/redpanda-connect/about/)
 
+## Licensing
+
+| Component                    | License    |
+| ---------------------------- | ---------- |
+| Redpanda Benthos core engine | MIT        |
+| 99%+ of the connectors       | Apache 2.0 |
+
+From https://www.redpanda.com/blog/redpanda-connect
+
+> For developers and engineers who built their entire business on [Redpanda] Benthos, you can continue to do that, as we’re keeping the core engine MIT Licensed. All those hard-to-build, hard-to-test features that made [Redpanda] Benthos so reliable over the years are free and open source for you to use. This is a win for the community that built their business on top of [Redpanda] Benthos – we are so sure of it, we bet the future of Redpanda connectivity on this engine itself.
+
+> For users, this means continued support of 223 Apache 2 Licensed, open source connectors with the large financial backing of Redpanda and customer footprint. It means increased focus on reliability, day 2 operations and security.
+
+## Community
+
+- Active open source community
+- [Redpanda Community Slack](https://redpanda.com/slack)
+
 ## Development
 
 - [Bloblang (mapping language)](https://docs.redpanda.com/redpanda-connect/guides/bloblang/about/)
