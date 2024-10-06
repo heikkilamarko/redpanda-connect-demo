@@ -20,7 +20,7 @@ remote_write:
     azuread:
       cloud: "AzurePublic"
       managed_identity:
-      client_id: MY_USER_MANAGED_IDENTITY_CLIENT_ID
+        client_id: MY_USER_MANAGED_IDENTITY_CLIENT_ID
 ```
 
 5. Run [Prometheus](https://prometheus.io/) on [Azure Container Apps](https://azure.microsoft.com/en-us/products/container-apps).
