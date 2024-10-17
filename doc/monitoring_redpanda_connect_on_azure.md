@@ -6,7 +6,7 @@
 
 2. Create an [Azure Monitor workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/azure-monitor-workspace-overview).
 
-3. In the Azure Monitor workspace's data collection rule, assign the `Monitoring Metrics Publisher` role to the managed identity.
+3. In the Azure Monitor workspace's **Data collection rule**, assign the `Monitoring Metrics Publisher` role to the managed identity.
 
 4. Configure the [Prometheus Remote Write](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write).
 
@@ -24,6 +24,8 @@ remote_write:
 ```
 
 5. Run [Prometheus](https://prometheus.io/) on [Azure Container Apps](https://azure.microsoft.com/en-us/products/container-apps).
+
+   - Assign the managed identity to the Container App running Prometheus.
 
 ## Links
 
