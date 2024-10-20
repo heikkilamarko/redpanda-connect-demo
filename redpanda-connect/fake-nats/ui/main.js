@@ -1,7 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { wsconnect, JSONCodec } from '@nats-io/nats-core';
-
-const codec = JSONCodec();
+import { wsconnect } from '@nats-io/nats-core';
 
 document.addEventListener('DOMContentLoaded', async (_event) => {
 	const nc = await wsconnect({
@@ -23,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async (_event) => {
 
 function handleMsg(msg) {
 	try {
-		const joke = codec.decode(msg.data)?.joke?.value ?? '<empty>';
+		const joke = msg.json()?.joke?.value ?? '<empty>';
 		const message = document.createElement('div');
 		message.classList = 'alert alert-info p-3 my-2 text-break';
 		message.textContent = joke;
