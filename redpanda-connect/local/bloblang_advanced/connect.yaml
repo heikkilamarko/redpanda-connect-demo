@@ -8,8 +8,10 @@ input:
 pipeline:
   processors:
     - mapping: |
+        let now = now()
+
         root.id = this.id
-        root.processed_at = now()
+        root.processed_at = $now
         root.item_count = this.items.length()
 
         map item_map {
@@ -26,6 +28,10 @@ pipeline:
         root.items = this.items.
           map_each(i -> i.apply("item_map")).
           squash()
+
+        root.now = $now
+        root.now_sub_one_hour = $now.ts_sub_iso8601("PT1H")
+        root.now_add_one_hour = $now.ts_add_iso8601("PT1H")
 
     - mapping: |
         root = this.format_json()
