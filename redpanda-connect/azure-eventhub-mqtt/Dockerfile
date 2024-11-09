@@ -1,2 +1,2 @@
-FROM redpandadata/connect:4.38
+FROM redpandadata/connect:4.39
 COPY connect.yaml /connect.yaml

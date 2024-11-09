@@ -11,10 +11,10 @@
 	},
 	"devDependencies": {
 		"prettier": "3.3.3",
-		"vite": "5.4.9"
+		"vite": "5.4.10"
 	},
 	"dependencies": {
-		"@nats-io/nats-core": "3.0.0-30",
+		"@nats-io/nats-core": "3.0.0-38",
 		"bootstrap": "5.3.3"
 	}
 }
