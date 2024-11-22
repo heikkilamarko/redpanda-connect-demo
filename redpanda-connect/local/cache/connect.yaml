@@ -6,6 +6,7 @@ input:
       json_documents: {}
 
 pipeline:
+  threads: 1
   processors:
     - log:
         message: "Processing message: ${!content()}"
