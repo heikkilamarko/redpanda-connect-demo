@@ -14,7 +14,7 @@
 		"vite": "6.0.3"
 	},
 	"dependencies": {
-		"@nats-io/nats-core": "3.0.0-47",
+		"@nats-io/nats-core": "3.0.0-48",
 		"bootstrap": "5.3.3"
 	}
 }
