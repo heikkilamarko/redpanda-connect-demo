@@ -1,0 +1,15 @@
+input:
+  file:
+    paths:
+      - ./messages.json
+    scanner:
+      json_documents: {}
+
+pipeline:
+  processors:
+    - javascript:
+        file: processor.js
+
+output:
+  file:
+    path: messages.processed.json
