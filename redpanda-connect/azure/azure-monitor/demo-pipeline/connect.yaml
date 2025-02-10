@@ -1,0 +1,26 @@
+input:
+  generate:
+    mapping: root = {}
+    interval: 0/10 * * * * *
+
+pipeline:
+  processors:
+    - mapping: |
+        root = this
+        root.processed_on = hostname()
+        root.processed_at = now()
+        root.processed_by = "demo-pipeline"
+
+output:
+  stdout: {}
+
+http:
+  address: ${HTTP_ADDRESS}
+
+logger:
+  level: ${LOG_LEVEL:INFO}
+  format: logfmt
+  static_fields:
+    service: demo-pipeline
+
+shutdown_delay: 5s
