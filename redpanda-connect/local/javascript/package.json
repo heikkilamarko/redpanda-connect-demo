@@ -3,6 +3,6 @@
   "dependencies": {
     "dayjs": "1.11.13",
     "fraction.js": "5.2.1",
-    "mathjs": "14.1.0"
+    "mathjs": "14.2.1"
   }
 }
