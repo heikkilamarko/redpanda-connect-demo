@@ -1,0 +1,17 @@
+input:
+  generate:
+    mapping: |
+      root.input = "VGCCCC=="
+    count: 1
+
+pipeline:
+  processors:
+    - mapping: |
+        root = this
+        root.output = this.input.decode("base64").decode_binary("float32", "big_endian")
+
+    - mapping: |
+        root = this.format_json()
+
+output:
+  stdout: {}
