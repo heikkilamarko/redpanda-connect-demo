@@ -81,10 +81,8 @@ func decodeBinary(data []byte, dataTypeStr string, byteOrderStr string) (any, er
 	}
 }
 
-func decode[T any](buf []byte, order binary.ByteOrder) (any, error) {
+func decode[T any](buf []byte, order binary.ByteOrder) (T, error) {
 	var data T
-	if _, err := binary.Decode(buf, order, &data); err != nil {
-		return nil, err
-	}
-	return data, nil
+	_, err := binary.Decode(buf, order, &data)
+	return data, err
 }

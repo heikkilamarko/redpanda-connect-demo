@@ -2,13 +2,15 @@ input:
   generate:
     mapping: |
       root.input = "VGCCCC=="
+      root.data_type = "float32"
+      root.byte_order = "big_endian"
     count: 1
 
 pipeline:
   processors:
     - mapping: |
         root = this
-        root.output = this.input.decode("base64").decode_binary("float32", "big_endian")
+        root.output = this.input.decode("base64").decode_binary(this.data_type, this.byte_order)
 
     - mapping: |
         root = this.format_json()
