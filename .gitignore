@@ -33,6 +33,7 @@ node_modules
 *.drawio.bkp
 
 *.processed.json
+*.processed.jsonl
 processed
 *.log
 .venv

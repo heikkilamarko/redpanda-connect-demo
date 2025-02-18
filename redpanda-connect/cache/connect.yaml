@@ -43,7 +43,7 @@ pipeline:
 
 output:
   file:
-    path: ./message.processed.json
+    path: ./message.processed.jsonl
 
 cache_resources:
   - label: memory_cache

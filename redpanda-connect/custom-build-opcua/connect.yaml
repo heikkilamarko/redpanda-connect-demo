@@ -22,4 +22,5 @@ pipeline:
         root.metadata = metadata()
 
 output:
-  stdout: {}
+  file:
+    path: ./message.processed.jsonl
