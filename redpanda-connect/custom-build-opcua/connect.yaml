@@ -18,7 +18,7 @@ input:
 pipeline:
   processors:
     - mapping: |
-        root.data = content().string()
+        root.data = this
         root.metadata = metadata()
 
 output:
