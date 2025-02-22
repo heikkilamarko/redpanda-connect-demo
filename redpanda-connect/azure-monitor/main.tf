@@ -14,18 +14,6 @@ resource "azurerm_user_assigned_identity" "demo" {
   location            = azurerm_resource_group.demo.location
 }
 
-resource "azurerm_monitor_workspace" "demo" {
-  name                = "mws-rpconnect-demo"
-  resource_group_name = azurerm_resource_group.demo.name
-  location            = azurerm_resource_group.demo.location
-}
-
-resource "azurerm_role_assignment" "demo_monitor_workspace" {
-  scope                = azurerm_monitor_workspace.demo.default_data_collection_rule_id
-  role_definition_name = "Monitoring Metrics Publisher"
-  principal_id         = azurerm_user_assigned_identity.demo.principal_id
-}
-
 resource "azurerm_container_registry" "demo" {
   name                = "crrpconnectdemo"
   resource_group_name = azurerm_resource_group.demo.name
@@ -44,6 +32,14 @@ resource "azurerm_log_analytics_workspace" "demo" {
   name                = "log-rpconnect-demo"
   resource_group_name = azurerm_resource_group.demo.name
   location            = azurerm_resource_group.demo.location
+}
+
+resource "azurerm_application_insights" "demo" {
+  name                = "appi-rpconnect-demo"
+  resource_group_name = azurerm_resource_group.demo.name
+  location            = azurerm_resource_group.demo.location
+  workspace_id        = azurerm_log_analytics_workspace.demo.id
+  application_type    = "other"
 }
 
 resource "azurerm_container_app_environment" "demo" {
@@ -89,6 +85,11 @@ resource "azurerm_container_app" "demo" {
         value = "INFO"
       }
 
+      env {
+        name  = "OPEN_TELEMETRY_COLLECTOR_GRPC_ADDRESS"
+        value = "localhost:4317"
+      }
+
       readiness_probe {
         transport = "HTTP"
         port      = 8080
@@ -103,19 +104,14 @@ resource "azurerm_container_app" "demo" {
     }
 
     container {
-      name   = "demo-alloy"
-      image  = "${azurerm_container_registry.demo.login_server}/demo-alloy:latest"
+      name   = "demo-otel-collector"
+      image  = "${azurerm_container_registry.demo.login_server}/demo-otel-collector:latest"
       cpu    = 0.25
       memory = "0.5Gi"
 
       env {
-        name  = "PROMETHEUS_REMOTE_WRITE_ENDPOINT_URL"
-        value = "__AZURE_MONITOR_WORKSPACE_METRICS_INGESTION_ENDPOINT__"
-      }
-
-      env {
-        name  = "PROMETHEUS_REMOTE_WRITE_AZUREAD_MANAGED_IDENTITY_CLIENT_ID"
-        value = azurerm_user_assigned_identity.demo.client_id
+        name  = "APPLICATIONINSIGHTS_CONNECTION_STRING"
+        value = azurerm_application_insights.demo.connection_string
       }
     }
   }

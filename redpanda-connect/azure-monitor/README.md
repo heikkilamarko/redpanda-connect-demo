@@ -26,22 +26,12 @@ terraform apply
 ./push.sh demo-pipeline latest
 ```
 
-### Grafana Alloy
+### OpenTelemetry Collector
 
 ```bash
-./build.sh demo-alloy latest
+./build.sh demo-otel-collector latest
 ```
 
 ```bash
-./push.sh demo-alloy latest
-```
-
-## 4. Set Azure Monitor Workspace Metrics Ingestion Endpoint
-
-In `main.tf` replace `__AZURE_MONITOR_WORKSPACE_METRICS_INGESTION_ENDPOINT__` with the endpoint URL visible in the overview section of your Azure Monitor Workspace.
-
-## 5. Run Terraform
-
-```bash
-terraform apply
+./push.sh demo-otel-collector latest
 ```
