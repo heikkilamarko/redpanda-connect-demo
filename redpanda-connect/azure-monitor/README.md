@@ -1,10 +1,6 @@
 # Running and Monitoring Redpanda Connect Pipelines in Azure Container Apps
 
-## 1. Set Azure Subscription ID
-
-In `main.tf` replace `__AZURE_SUBSCRIPTION_ID__` with your Azure Subscription ID.
-
-## 2. Run Terraform
+## 1. Run Terraform
 
 ```bash
 terraform init
@@ -14,7 +10,7 @@ terraform init
 terraform apply
 ```
 
-## 3. Build and Push Docker Images
+## 2. Build and Push Docker Images
 
 ### Demo Pipeline
 
@@ -29,9 +25,9 @@ terraform apply
 ### OpenTelemetry Collector
 
 ```bash
-./build.sh demo-otel-collector latest
+./build.sh otel-collector latest
 ```
 
 ```bash
-./push.sh demo-otel-collector latest
+./push.sh otel-collector latest
 ```

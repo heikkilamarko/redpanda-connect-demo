@@ -2,7 +2,7 @@ receivers:
   otlp:
     protocols:
       grpc:
-        endpoint: 0.0.0.0:4317
+        endpoint: ${env:RECEIVER_GRPC_ENDPOINT}
 
   prometheus:
     config:
@@ -10,10 +10,12 @@ receivers:
         - job_name: otel-collector
           scrape_interval: 10s
           static_configs:
-            - targets: [localhost:8080]
+            - targets:
+                - ${env:DEMO_PIPELINE_HTTP_ADDRESS}
 
 exporters:
   azuremonitor:
+    connection_string: ${env:APPLICATIONINSIGHTS_CONNECTION_STRING}
 
 service:
   pipelines:

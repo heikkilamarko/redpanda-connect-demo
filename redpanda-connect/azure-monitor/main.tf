@@ -1,6 +1,15 @@
+variable "azure_subscription_id" {
+  description = "Azure Subscription ID"
+  type        = string
+}
+
 provider "azurerm" {
-  features {}
-  subscription_id = "__AZURE_SUBSCRIPTION_ID__"
+  features {
+    log_analytics_workspace {
+      permanently_delete_on_destroy = true
+    }
+  }
+  subscription_id = var.azure_subscription_id
 }
 
 resource "azurerm_resource_group" "demo" {
@@ -104,10 +113,20 @@ resource "azurerm_container_app" "demo" {
     }
 
     container {
-      name   = "demo-otel-collector"
-      image  = "${azurerm_container_registry.demo.login_server}/demo-otel-collector:latest"
+      name   = "otel-collector"
+      image  = "${azurerm_container_registry.demo.login_server}/otel-collector:latest"
       cpu    = 0.25
       memory = "0.5Gi"
+
+      env {
+        name  = "RECEIVER_GRPC_ENDPOINT"
+        value = "0.0.0.0:4317"
+      }
+
+      env {
+        name  = "DEMO_PIPELINE_HTTP_ADDRESS"
+        value = "localhost:8080"
+      }
 
       env {
         name  = "APPLICATIONINSIGHTS_CONNECTION_STRING"
