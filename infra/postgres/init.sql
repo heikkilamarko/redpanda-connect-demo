@@ -6,14 +6,14 @@ CREATE DATABASE redpanda_connect;
 CREATE SCHEMA demo;
 
 CREATE TABLE demo.processed_messages (
-    id SERIAL PRIMARY KEY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
-    created_at timestamptz NOT NULL
+    created_at TIMESTAMPTZ NOT NULL
 );
 
 CREATE TABLE demo.factories (
-    id SERIAL PRIMARY KEY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT,
     location TEXT,
     production_capacity NUMERIC
