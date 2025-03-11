@@ -5,5 +5,5 @@ npm install
 ```
 
 ```bash
-docker run --rm -it -v $(pwd):/connect -w /connect redpandadata/connect:4.47 run
+docker run --rm -it -v $(pwd):/connect -w /connect redpandadata/connect:4.49 run
 ```

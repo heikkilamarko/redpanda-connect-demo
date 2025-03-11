@@ -10,11 +10,11 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"prettier": "3.5.0",
-		"vite": "6.1.0"
+		"prettier": "3.5.3",
+		"vite": "6.2.1"
 	},
 	"dependencies": {
-		"@nats-io/nats-core": "3.0.0-50",
+		"@nats-io/nats-core": "3.0.0-54",
 		"bootstrap": "5.3.3"
 	}
 }
