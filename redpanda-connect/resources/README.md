@@ -1,5 +1,5 @@
 # Redpanda Connect Pipeline
 
 ```bash
-docker run --rm -it -v $(pwd):/connect -w /connect redpandadata/connect:4.49 run -r "resources/*.yaml"
+docker run --rm -it -v $(pwd):/connect -w /connect redpandadata/connect:4.50 run -r "resources/*.yaml"
 ```
