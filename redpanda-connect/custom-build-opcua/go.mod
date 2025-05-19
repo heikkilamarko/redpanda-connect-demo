@@ -1,11 +1,11 @@
 module redpanda-connect-custom-build
 
-go 1.24.2
+go 1.24.3
 
 require (
-	github.com/redpanda-data/benthos/v4 v4.47.0
-	github.com/redpanda-data/connect/v4 v4.52.0
-	github.com/united-manufacturing-hub/benthos-umh v0.8.0
+	github.com/redpanda-data/benthos/v4 v4.51.0
+	github.com/redpanda-data/connect/v4 v4.55.0
+	github.com/united-manufacturing-hub/benthos-umh v0.9.2
 )
 
 require (
@@ -18,18 +18,18 @@ require (
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cockroachdb/apd/v3 v3.2.1 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.6 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
-	github.com/fsnotify/fsnotify v1.8.0 // indirect
+	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/gofrs/uuid/v5 v5.3.2 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/gopcua/opcua v0.7.1 // indirect
+	github.com/gopcua/opcua v0.8.0 // indirect
 	github.com/gorilla/handlers v1.5.2 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
@@ -49,14 +49,14 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/nsf/jsondiff v0.0.0-20230430225905-43f6cf3098c1 // indirect
 	github.com/pierrec/lz4/v4 v4.1.22 // indirect
-	github.com/prometheus/client_golang v1.21.1 // indirect
-	github.com/prometheus/client_model v0.6.1 // indirect
-	github.com/prometheus/common v0.63.0 // indirect
-	github.com/prometheus/procfs v0.16.0 // indirect
+	github.com/prometheus/client_golang v1.22.0 // indirect
+	github.com/prometheus/client_model v0.6.2 // indirect
+	github.com/prometheus/common v0.64.0 // indirect
+	github.com/prometheus/procfs v0.16.1 // indirect
 	github.com/quipo/dependencysolver v0.0.0-20170801134659-2b009cb4ddcc // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20250401214520-65e299d6c5c9 // indirect
-	github.com/rickb777/period v1.0.9 // indirect
-	github.com/rickb777/plural v1.4.2 // indirect
+	github.com/rickb777/period v1.0.14 // indirect
+	github.com/rickb777/plural v1.4.4 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/segmentio/ksuid v1.0.4 // indirect
@@ -73,12 +73,12 @@ require (
 	go.opentelemetry.io/otel/metric v1.35.0 // indirect
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.36.0 // indirect
-	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
-	golang.org/x/oauth2 v0.28.0 // indirect
-	golang.org/x/sync v0.12.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/crypto v0.38.0 // indirect
+	golang.org/x/exp v0.0.0-20250506013437-ce4c2cf36ca6 // indirect
+	golang.org/x/oauth2 v0.30.0 // indirect
+	golang.org/x/sync v0.14.0 // indirect
+	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/text v0.25.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
