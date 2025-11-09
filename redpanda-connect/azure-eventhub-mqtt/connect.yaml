@@ -8,6 +8,7 @@ input:
     topics:
       - ${AZURE_KAFKA_TOPIC}
     consumer_group: ${AZURE_KAFKA_CONSUMER_GROUP}
+    session_timeout: 30s
     sasl:
       - mechanism: PLAIN
         username: "$ConnectionString"
