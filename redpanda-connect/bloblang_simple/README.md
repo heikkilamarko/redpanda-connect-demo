@@ -1,5 +1,5 @@
 # Redpanda Connect Pipeline
 
 ```bash
-docker run --rm -it -v $(pwd):/connect -w /connect redpandadata/connect:4.69 run
+docker run --rm -it -v $(pwd):/connect -w /connect redpandadata/connect:4.78 run
 ```

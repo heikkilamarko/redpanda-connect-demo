@@ -1,0 +1,5 @@
+name: yell
+summary: yells back what you give it
+command: ["uv", "run", "main.py"]
+type: processor
+fields: []

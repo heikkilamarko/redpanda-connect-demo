@@ -1,0 +1,17 @@
+input:
+  generate:
+    mapping: |
+      root = {
+        "message": fake("sentence")
+      }
+    interval: ""
+    count: 10
+
+pipeline:
+  processors:
+    - yell: {}
+
+output:
+  file:
+    codec: lines
+    path: output.processed.jsonl

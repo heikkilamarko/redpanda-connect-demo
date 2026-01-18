@@ -13,4 +13,4 @@ pipeline:
 
 output:
   file:
-    path: javascript.processed.json
+    path: javascript.processed.jsonl
