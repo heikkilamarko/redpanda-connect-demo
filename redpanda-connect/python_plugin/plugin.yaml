@@ -1,5 +1,5 @@
 name: yell
 summary: yells back what you give it
-command: ["uv", "run", "main.py"]
+command: ["uv", "run", "--no-sync", "--frozen", "main.py"]
 type: processor
 fields: []

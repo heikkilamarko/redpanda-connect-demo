@@ -3,6 +3,10 @@ import logging
 from datetime import datetime, timezone
 from redpanda_connect import Message, processor, processor_main
 
+logging.getLogger("grpc").setLevel(logging.ERROR)
+logging.getLogger("grpc._cython.cygrpc").setLevel(logging.ERROR)
+logging.getLogger("redpanda_connect._grpc").setLevel(logging.ERROR)
+
 logger = logging.getLogger(__name__)
 
 
