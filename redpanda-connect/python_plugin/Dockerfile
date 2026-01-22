@@ -1,4 +1,6 @@
 FROM ghcr.io/astral-sh/uv:alpine
-RUN uv python install
-COPY --from=redpandadata/connect:4.78 /redpanda-connect /
-ENTRYPOINT ["/redpanda-connect"]
+WORKDIR /app
+COPY --from=redpandadata/connect:4.78 /redpanda-connect .
+COPY . .
+RUN uv sync --frozen --no-dev
+ENTRYPOINT ["./redpanda-connect", "run", "--rpc-plugins=plugin.yaml", "connect.yaml"]

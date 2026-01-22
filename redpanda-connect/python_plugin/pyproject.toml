@@ -1,0 +1,9 @@
+[project]
+name = "yell-plugin"
+version = "0.1.0"
+description = "Redpanda Connect Python Plugin that makes the data louder"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "redpanda-connect>=0.1.3",
+]

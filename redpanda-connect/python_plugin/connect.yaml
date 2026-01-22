@@ -5,7 +5,7 @@ input:
         "message": fake("sentence")
       }
     interval: ""
-    count: 10
+    count: 1000
 
 pipeline:
   processors:
@@ -14,4 +14,4 @@ pipeline:
 output:
   file:
     codec: lines
-    path: output.processed.jsonl
+    path: ./processed/output.jsonl

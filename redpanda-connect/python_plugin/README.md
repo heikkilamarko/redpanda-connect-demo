@@ -11,5 +11,5 @@ docker build -t redpanda-connect-python-plugin .
 ## Docker Run
 
 ```bash
-docker run --rm -it -v $(pwd):/connect -w /connect redpanda-connect-python-plugin:latest run --rpc-plugins=plugin.yaml connect.yaml
+docker run --rm -it -v $(pwd)/processed:/app/processed redpanda-connect-python-plugin:latest
 ```

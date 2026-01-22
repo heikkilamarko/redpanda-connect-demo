@@ -1,11 +1,3 @@
-# /// script
-# dependencies = [
-#   "redpanda-connect",
-# ]
-# ///
-
-# pyright: reportMissingImports=false
-
 import asyncio
 import logging
 from datetime import datetime, timezone
