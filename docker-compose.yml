@@ -45,7 +45,7 @@ services:
       - redpanda-connect-demo
 
   minio:
-    image: minio/minio
+    image: quay.io/minio/aistor/minio
     deploy:
       restart_policy:
         condition: on-failure
